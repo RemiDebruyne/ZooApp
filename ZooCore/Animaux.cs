@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ZooCore
 {
-    internal abstract class Animaux
+    public class Animal : BaseModel
     {
-        public int Id  { get; set; }
+        [RegularExpression("^[A-Z][a-z]*$")]
         public string Name { get; set; }
         public int Age { get; set; }
         public decimal? Weight { get; set; }
         public decimal? Size { get; set; }
+        [RegularExpression("[a-z]*")]
         public string? Color { get; set; }
         public Family Family { get; set; }
         public Species Species { get; set; }
