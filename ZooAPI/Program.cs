@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using ZooAPI.Data;
 using ZooAPI.Repositories;
 using ZooCore;
@@ -10,8 +11,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ApplicationDbContext>();
-builder.Services.AddScoped<IRepository<Animal>>();
+builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); ;
+builder.Services.AddScoped<IRepository<Animal>, AnimalRepository>();
 
 var app = builder.Build();
 
