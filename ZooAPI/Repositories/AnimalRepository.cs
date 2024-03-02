@@ -16,7 +16,7 @@ namespace ZooAPI.Repositories
             _context = context;
         }
 
-        public async Task<Animal> AddAsync(Animal entity)
+        public async Task<Animal?> AddAsync(Animal entity)
         {
             var AddedEntity = await _context.Set<Animal>().AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -29,7 +29,7 @@ namespace ZooAPI.Repositories
 
         public async Task<IEnumerable<Animal?>> GetAllAsync(Expression<Func<Animal, bool>> predicate)
         {
-            return _context.Set<Animal>().Where(predicate);
+            return  _context.Set<Animal>().Where(predicate);
         }
 
         public async Task<IEnumerable<Animal?>> GetAllAsync()

@@ -10,7 +10,7 @@ namespace ZooCore
     public class Animal : BaseModel
     {
         [RegularExpression("^[A-Z][a-z]*$")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int Age { get; set; }
         public decimal? Weight { get; set; }
         public decimal? Size { get; set; }
