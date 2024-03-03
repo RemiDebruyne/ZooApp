@@ -15,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); ;
 builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseNpgsql(builder.Configuration.GetConnectionString("PostgreConnection"))); ;
-builder.Services.AddScoped<IRepository<Animal>, AnimalRepository>();
+builder.Services.AddScoped<IRepository<Animal>, GenericRepository>();
 
 var app = builder.Build();
 

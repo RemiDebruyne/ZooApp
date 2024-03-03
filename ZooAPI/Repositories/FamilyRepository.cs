@@ -1,6 +1,6 @@
 ﻿namespace ZooAPI.Repositories
 {
-    public class AnimalRepository
+    public class FamilyRepository
     {
     }
 }
