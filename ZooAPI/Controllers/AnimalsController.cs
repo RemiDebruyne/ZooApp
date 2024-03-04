@@ -53,7 +53,6 @@ namespace ZooAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] Animal animal)
         {
-            if(animal.Family )
 
             var entityAdded = await _repository.AddAsync(animal);
 
