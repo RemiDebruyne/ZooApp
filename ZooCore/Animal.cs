@@ -17,7 +17,7 @@ namespace ZooCore
 		public string? Name { get; set; }
 		public int? Age { get; set; }
 
-		[RegularExpression(@"\d+,\d+")]
+		[RegularExpression(@"\d+(\.\d+)?")]
 		public decimal? Weight { get; set; }
 
 		[RegularExpression(@"\d+,\d+")]
@@ -25,11 +25,9 @@ namespace ZooCore
 		[RegularExpression("[a-z]*")]
 		public string? Color { get; set; }
 		public Family? Family { get; set; }
-		[JsonIgnore]
 		public int FamilyId { get; set; }
 		public Species? Species { get; set; }
 
-		[JsonIgnore]
 		public int SpeciesId { get; set; }
 	}
 }

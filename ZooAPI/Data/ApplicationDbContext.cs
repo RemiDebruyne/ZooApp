@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using ZooCore;
 
 namespace ZooAPI.Data
@@ -7,6 +9,21 @@ namespace ZooAPI.Data
 	{
 		public ApplicationDbContext(DbContextOptions options) : base(options)
 		{
+			var dbCreater = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+			if (dbCreater != null)
+			{
+				// Create Database 
+				if (!dbCreater.CanConnect())
+				{
+					dbCreater.Create();
+				}
+
+				// Create Tables
+				if (!dbCreater.HasTables())
+				{
+					dbCreater.CreateTables();
+				}
+			}
 		}
 
 		public DbSet<Animal> Animals { get; set; }

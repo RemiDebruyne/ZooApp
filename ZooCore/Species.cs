@@ -9,12 +9,11 @@ namespace ZooCore
 {
     public class Species : BaseModel
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public  List<Animal>? Animals { get; set; }
 
         public Family? Family { get; set; }
 
-        [JsonIgnore]
         public int? FamilyId {  get; set; }
     }
 }

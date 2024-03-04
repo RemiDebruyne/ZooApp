@@ -81,8 +81,6 @@ namespace ZooAPI.Controllers
 
             animal.Id = id;
 
-
-
             if (await _repository.UpdateAsync(animal))
                 return Ok("The animal was updated !");
 
@@ -96,7 +94,7 @@ namespace ZooAPI.Controllers
 
             if (entity != null)
             {
-                _repository.DeleteAsync(entity.Id);
+               await _repository.DeleteAsync(entity.Id);
                 return Ok("The animal was deleted");
             }
             return BadRequest("Oops something went wrong");

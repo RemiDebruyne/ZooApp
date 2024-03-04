@@ -8,7 +8,7 @@ namespace ZooCore
 {
     public class Family : BaseModel
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public string? Description { get; set; }
         public List<Animal>? Animals { get; set; }
         public List<Species>? Species { get; set; }
