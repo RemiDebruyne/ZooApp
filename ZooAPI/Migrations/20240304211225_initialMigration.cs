@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -13,10 +12,10 @@ namespace ZooAPI.Migrations
                 name: "Family",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,10 +26,10 @@ namespace ZooAPI.Migrations
                 name: "Species",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    FamilyId = table.Column<int>(type: "integer", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FamilyId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,15 +45,15 @@ namespace ZooAPI.Migrations
                 name: "Animals",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    Age = table.Column<int>(type: "integer", nullable: true),
-                    Weight = table.Column<decimal>(type: "numeric(37,2)", precision: 37, scale: 2, nullable: true),
-                    Size = table.Column<decimal>(type: "numeric(37,2)", precision: 37, scale: 2, nullable: true),
-                    Color = table.Column<string>(type: "text", nullable: true),
-                    FamilyId = table.Column<int>(type: "integer", nullable: false),
-                    SpeciesId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Age = table.Column<int>(type: "int", nullable: true),
+                    Weight = table.Column<decimal>(type: "decimal(37,2)", precision: 37, scale: 2, nullable: true),
+                    Size = table.Column<decimal>(type: "decimal(37,2)", precision: 37, scale: 2, nullable: true),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FamilyId = table.Column<int>(type: "int", nullable: false),
+                    SpeciesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,12 +75,17 @@ namespace ZooAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Family",
                 columns: new[] { "Id", "Description", "Name" },
-                values: new object[,]
-                {
-                    { 1, null, "Ursidae" },
-                    { 2, null, "Felin" },
-                    { 3, null, "Avian" }
-                });
+                values: new object[] { 1, null, "Ursidae" });
+
+            migrationBuilder.InsertData(
+                table: "Family",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[] { 2, null, "Felin" });
+
+            migrationBuilder.InsertData(
+                table: "Family",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[] { 3, null, "Avian" });
 
             migrationBuilder.InsertData(
                 table: "Species",
@@ -98,12 +102,17 @@ namespace ZooAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Animals",
                 columns: new[] { "Id", "Age", "Color", "FamilyId", "Name", "Size", "SpeciesId", "Weight" },
-                values: new object[,]
-                {
-                    { 1, 12, "Dark grey", 1, "Balou", null, 1, null },
-                    { 2, 10, "Orange", 2, "Tigrou", null, 1, null },
-                    { 3, 37, "Brown body with white head", 3, "USA", null, 5, null }
-                });
+                values: new object[] { 1, 12, "Dark grey", 1, "Balou", null, 3, null });
+
+            migrationBuilder.InsertData(
+                table: "Animals",
+                columns: new[] { "Id", "Age", "Color", "FamilyId", "Name", "Size", "SpeciesId", "Weight" },
+                values: new object[] { 2, 10, "Orange", 2, "Tigrou", null, 1, null });
+
+            migrationBuilder.InsertData(
+                table: "Animals",
+                columns: new[] { "Id", "Age", "Color", "FamilyId", "Name", "Size", "SpeciesId", "Weight" },
+                values: new object[] { 3, 37, "Brown body with white head", 3, "Eaglee", null, 5, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Animals_FamilyId",

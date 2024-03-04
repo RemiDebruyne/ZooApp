@@ -44,9 +44,14 @@ namespace ZooAPI.Repositories
             return _context.Set<T>().FirstOrDefault(predicate);
         }
 
-        public async Task<bool> UpdateAsync(T entity)
+        public virtual async Task<bool> UpdateAsync(T entity)
         {
+            
             var entityFromDb = await GetAsync(e => e.Id == entity.Id);
+
+            if (entityFromDb == null)
+                return false;
+
 
             var entityProperties = entity.GetType().GetProperties();
 
@@ -54,6 +59,7 @@ namespace ZooAPI.Repositories
             {
                 var valeurPropriete = property.GetValue(entity, null);
                 var valeurProprieteFromDb = property.GetValue(entityFromDb, null);
+                // Vérifier si la valeur n'est pas nulle et si elle est différente
                 if (valeurProprieteFromDb != valeurPropriete)
                     valeurProprieteFromDb = valeurPropriete;
             }

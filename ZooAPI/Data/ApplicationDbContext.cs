@@ -9,21 +9,21 @@ namespace ZooAPI.Data
 	{
 		public ApplicationDbContext(DbContextOptions options) : base(options)
 		{
-			var dbCreater = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
-			if (dbCreater != null)
-			{
-				// Create Database 
-				if (!dbCreater.CanConnect())
-				{
-					dbCreater.Create();
-				}
+			//var dbCreater = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+			//if (dbCreater != null)
+			//{
+			//	// Create Database 
+			//	if (!dbCreater.CanConnect())
+			//	{
+			//		dbCreater.Create();
+			//	}
 
-				// Create Tables
-				if (!dbCreater.HasTables())
-				{
-					dbCreater.CreateTables();
-				}
-			}
+			//	// Create Tables
+			//	if (!dbCreater.HasTables())
+			//	{
+			//		dbCreater.CreateTables();
+			//	}
+			//}
 		}
 
 		public DbSet<Animal> Animals { get; set; }
@@ -56,9 +56,9 @@ namespace ZooAPI.Data
 
 			var animalList = new List<Animal>()
 			{
-			new Animal { Id = 1, Name ="Balou", Age= 12, Color="Dark grey", FamilyId = 1, SpeciesId = 1},
+			new Animal { Id = 1, Name ="Balou", Age= 12, Color="Dark grey", FamilyId = 1, SpeciesId = 3},
 			new Animal { Id = 2, Name ="Tigrou", Age = 10, Color="Orange", FamilyId = 2, SpeciesId = 1},
-			new Animal { Id = 3, Name ="USA", Age= 37, Color="Brown body with white head", FamilyId = 3, SpeciesId = 5},
+			new Animal { Id = 3, Name ="Eaglee", Age= 37, Color="Brown body with white head", FamilyId = 3, SpeciesId = 5},
 
 			};
 

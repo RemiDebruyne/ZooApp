@@ -77,7 +77,7 @@ namespace ZooAPI.Controllers
         {
             var entity = await _repository.GetAsync(e => e.Id == id);
             if (entity == null)
-                return BadRequest("The animal was not found");
+                return NotFound("The animal was not found");
 
             animal.Id = id;
 

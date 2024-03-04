@@ -20,7 +20,7 @@ namespace ZooCore
 		[RegularExpression(@"\d+(\.\d+)?")]
 		public decimal? Weight { get; set; }
 
-		[RegularExpression(@"\d+,\d+")]
+		[RegularExpression(@"\d+(\.\d+)?")]
 		public decimal? Size { get; set; }
 		[RegularExpression("[a-z]*")]
 		public string? Color { get; set; }
