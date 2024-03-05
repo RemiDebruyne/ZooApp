@@ -16,7 +16,7 @@ namespace ZooAPI.Repositories
 		{
 
 
-			return _context.Set<Animal>();
+			return _context.Set<Animal>().Include(e => e.Family).Include(e => e.Species);
 
 		}
 
@@ -36,7 +36,7 @@ namespace ZooAPI.Repositories
 			if (entityFromDb == null)
 				return false;
 
-			if(entityFromDb.Name != entity.Name) 
+			if (entityFromDb.Name != entity.Name)
 				entityFromDb.Name = entity.Name;
 			if (entityFromDb.Age != entity.Age)
 				entityFromDb.Age = entity.Age;

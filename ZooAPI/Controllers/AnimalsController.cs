@@ -16,23 +16,26 @@ namespace ZooAPI.Controllers
             _repository = repository;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            IEnumerable<Animal> animals = await _repository.GetAllAsync();
-
-            return Ok(animals);
-        }        
-        
-        
-        // TODO ajouter une route pour trouver un animal en fonction de sa famille
         //[HttpGet]
-        //public async Task<IActionResult> GetAllByFamily([FromQuery] int family)
+        //public async Task<IActionResult> GetAll()
         //{
         //    IEnumerable<Animal> animals = await _repository.GetAllAsync();
 
         //    return Ok(animals);
         //}
+
+
+        // TODO ajouter une route pour trouver un animal en fonction de sa famille
+        [HttpGet]
+        public async Task<IActionResult> GetAll([FromQuery] int? family, [FromQuery] int? species, [FromQuery] string? color, [FromQuery] string? name)
+        {
+            var animals = await _repository.GetAllAsync();
+
+            if (animals.Count() == 0)
+                return Ok(new { Message = "No animals were found" });
+
+            return Ok(animals);
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -45,7 +48,7 @@ namespace ZooAPI.Controllers
             return Ok(new
             {
                 Message = "An animal was found",
-                Animal = entity
+                Animal = new { Id = entity.Id, Name = entity.Name, Species = entity.Species.Name }
 
             });
         }
@@ -94,7 +97,7 @@ namespace ZooAPI.Controllers
 
             if (entity != null)
             {
-               await _repository.DeleteAsync(entity.Id);
+                await _repository.DeleteAsync(entity.Id);
                 return Ok("The animal was deleted");
             }
             return BadRequest("Oops something went wrong");

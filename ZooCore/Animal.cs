@@ -13,8 +13,10 @@ namespace ZooCore
 {
 	public class Animal : BaseModel
 	{
-		[RegularExpression("[a-z]*$")]
+		[RegularExpression("^[a-zA-Z\\s]+$")]
 		public string? Name { get; set; }
+
+		[RegularExpression(@"\d+")]
 		public int? Age { get; set; }
 
 		[RegularExpression(@"\d+(\.\d+)?")]
@@ -22,12 +24,12 @@ namespace ZooCore
 
 		[RegularExpression(@"\d+(\.\d+)?")]
 		public decimal? Size { get; set; }
-		[RegularExpression("[a-z]*")]
+
+		[RegularExpression("^[a-zA-Z\\s]+$")]
 		public string? Color { get; set; }
 		public Family? Family { get; set; }
-		public int FamilyId { get; set; }
+		public int? FamilyId { get; set; }
 		public Species? Species { get; set; }
-
-		public int SpeciesId { get; set; }
+        public int? SpeciesId { get; set; }
 	}
 }
